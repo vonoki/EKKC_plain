@@ -45,7 +45,6 @@ function configsink() {
     "value.converter.schemas.enable": "false"
   }
 }'
-
 }
 
 function install() {

@@ -88,7 +88,7 @@ services:
       CONNECT_PLUGIN_PATH: /connect-plugins
     volumes:
       - type: bind
-        source: /home/v0n0k1/kafka/EKKC/connect-plugins
+        source: /opt/EKK/connect-plugins
         target: /connect-plugins
     networks:
       esnet:

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+function installdocker() {
+  echo -e "\e[32m[X]\e[0m Installing Docker"
+  curl -fsSL https://get.docker.com -o get-docker.sh >/dev/null
+  sh get-docker.sh >/dev/null
+}
+
 function configuredocker() {
   sysctl -w vm.max_map_count=262144
   SYSCTL_STATUS=$(grep vm.max_map_count /etc/sysctl.conf)
@@ -62,10 +68,7 @@ function install() {
   usermod -aG docker hyphy
   ufw allow OpenSSH
 
-  #install docker
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  installdocker
 
   #move configs
   echo -e "\e[31m[!]\e[0m Duplicationg config."
